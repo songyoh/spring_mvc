@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*; // static요소로 Assert구문 사용시 alt+enter키로 등록해야함
+import static org.assertj.core.api.Assertions.assertThat; // deleteTest()구문작성시 사용된 assertThat() 임포트문수기로 입력
 
 public class ScoreRepositoryTest {
 
     // 테스트 대상인 ScoreRepositoryImpl 클래스를 상단에 선언해둔다.
     ScoreRepository repository = new ScoreRepositoryImpl();
+    //coreRepository repository; 선언만하고 초기화를 안할경우 에러발생
 
     @Test
     public void ScoreRepositoryStaticVarTest(){
@@ -83,6 +85,27 @@ public class ScoreRepositoryTest {
         assertEquals(4, result.size());
         assertTrue(boolResult); // 실행이 잘 되면 true, 오류면 false
     }
+
+    @Test
+    @DisplayName("저장소에서 2번 학생 삭제 후 리스트 전체조회시 개수는 2개, 다시 2번학생 조회시 null")
+    public void deleteTest(){
+        // given : 학생 번호 저장
+        int studentNumber = 2;
+
+        // when : 해당번호 학생 삭제, findAll()로 전체 데이터 가져오기 실행, 2번학생만 조회도 실행해보기 - 삭제 되었는지 검증
+        boolean result = repository.deleteByStudentNumber(studentNumber);// 삭제 성공시 true 리턴
+        List<Score> scoreList = repository.findAll(); // 2개의 데이터만 조회됨
+        Score score = repository.findByStudentNumber(studentNumber); // null이 조회됨
+
+        // then : 전체목록의 길이는 2, score 변수에는 null이 담긴다고 단언
+        /*System.out.println(scoreList.size() == 2);*/
+        assertThat(scoreList.size()).isEqualTo(2); // 아래 문법과 같은 단언문
+        //assertEquals(2, scoreList.size());
+        assertNull(score);
+        assertTrue(result); // 삭제성공시 true
+
+    }
+
 
 
 

@@ -48,3 +48,13 @@ https://xzio.tistory.com/1298
 위 블로그 참조.
 
 ---
+
+# TDD방식 레포지토리 구현
+1. 학생 성적정보 등록화면을 보여주고, 성적정보 목록조회 처리 - 조회구문
+/score/list : GET방식(DB변경 없음)
+2. 성적정보 등록 처리 요청
+/score/register : POST방식(DB변경 생김)
+3. 성적정보 삭제 요청
+/score/remove : POST방식(DB변경 생김)
+4. 성적정보 상세 요청 - 조회구문
+/score/detail : GET방식(DB변경 없음)
