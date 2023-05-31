@@ -57,7 +57,7 @@ public class ScoreRepositoryImpl implements ScoreRepository{
     }
 
     @Override
-    public boolean deleteByStudentNumber(int studentNumber) {
+    public boolean deleteByStudentNumber(int studentNumber) { // 학생 번호 입력시 알아서 삭제되도록 처리
         if(!scoreMap.containsKey(studentNumber)) return false; // 들어있지 않을때(!-not연산자) true를 리턴
         scoreMap.remove(studentNumber);
         return true;

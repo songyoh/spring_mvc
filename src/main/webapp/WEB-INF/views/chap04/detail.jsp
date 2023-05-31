@@ -10,10 +10,10 @@
 </head>
 <body>
     <div class="container">
-        <table class="table">
+        <h1>${score.studentNumber}번 학생 성적정보</h1>
+        <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>학번</th>
                     <th>이름</th>
                     <th>국어</th>
                     <th>수학</th>
@@ -23,19 +23,21 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="score" items="${studentNumber}">
-                    <tr>
-                        <td>${score.studentNumber}</td>
-                        <td>${score.name}</td>
-                        <td>${score.korScore}</td>
-                        <td>${score.mathScore}</td>
-                        <td>${score.engScore}</td>
-                        <td>${score.korScore + score.mathScore + score.engScore}</td>
-                        <td>${(score.korScore + score.mathScore + score.engScore)/3}</td>
-                    </tr>
-                </c:forEach>
+                <tr>
+                    <td>${score.name}</td>
+                    <td>${score.korScore}</td>
+                    <td>${score.mathScore}</td>
+                    <td>${score.engScore}</td>
+                    <td>${score.korScore + score.mathScore + score.engScore}</td>
+                    <td>${(score.korScore + score.mathScore + score.engScore)/3}</td>
+                </tr>
             </tbody>
-        </table>
+        </table><!-- 조회테이블 종료 지점 -->
+        <a href="/score/list" class="btn btn-primary">목록</a> <!-- 전체 scoreList를 보여주는 버튼 -->
+        <form action="/score/remove" method="POST"> <!-- 학생번호 입력시 학생정보를 삭제해주는 기능 추가 -->
+            <input type="hidden" name="studentNumber" value="${score.studentNumber}">
+            <input type="submit" class="btn btn-secondary" value="삭제하기">
+        </form>
     </div>
 </body>
 </html>
